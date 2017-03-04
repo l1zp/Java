@@ -3,6 +3,8 @@ package Week_2;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
+import java.util.Iterator;
+
 /**
  * Created by Lizp on 2017/3/2.
  */
@@ -15,7 +17,8 @@ public class Permutation {
             String item = StdIn.readString();
             q.enqueue(item);
         }
+        Iterator<String> ite = q.iterator();
         for(int i = 0; i < k; i++)
-            StdOut.println(q.iterator().next());
+            StdOut.println(ite.next());
     }
 }

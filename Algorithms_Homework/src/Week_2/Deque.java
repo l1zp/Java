@@ -4,6 +4,7 @@ import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Created by Lizp on 2017/3/2.
@@ -32,7 +33,6 @@ public class Deque<Item> implements Iterable<Item> {
         first.item = item;
         first.next = oldfirst;
         first.prev = null;
-        // 需要判断特殊情况
         if(isEmpty())
             last = first;
         else
@@ -53,20 +53,26 @@ public class Deque<Item> implements Iterable<Item> {
     }
     public Item removeFirst() { // remove and return the item from the front
         Item item = first.item;
-        first = first.next;
-        first.prev = null;
+        N --;
         if (isEmpty())
             last = null;
-        N --;
+        else {
+            first = first.next;
+            first.prev = null;
+        }
         return item;
     }
     public Item removeLast() { // remove and return the item from the end
         Item item = last.item;
-        last = last.prev;
-        last.next = null;
+        N --;
+
         if (isEmpty())
             first = null;
-        N --;
+        else {
+            last = last.prev;
+            last.next = null;
+        }
+
         return item;
     }
     public Iterator<Item> iterator() { // return an iterator over items in order from front to end
@@ -81,6 +87,8 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public Item next() {
+            if (!hasNext())
+                throw new NoSuchElementException();
             Item item = current.item;
             current = current.next;
             return item;
@@ -88,7 +96,7 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public void remove() {
-
+            throw new UnsupportedOperationException();
         }
     }
     public static void main(String[] args) { // unit testing (optional)

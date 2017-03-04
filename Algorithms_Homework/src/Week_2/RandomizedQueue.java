@@ -5,6 +5,7 @@ import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Created by Lizp on 2017/3/2.
@@ -51,7 +52,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         return new ArrayIterator();
     }
     private class ArrayIterator implements Iterator<Item>{
-        int current = 0;
+        private int current = 0;
         Item[] temps = a.clone();
         public boolean hasNext() {
             return current < N;
@@ -59,6 +60,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         @Override
         public Item next() {
+            if (!hasNext())
+                throw new NoSuchElementException();
             int r = current + StdRandom.uniform(N - current);
             Item temp = temps[r];
             temps[r] = temps[current];
@@ -68,17 +71,21 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         @Override
         public void remove() {
-
+            throw new UnsupportedOperationException();
         }
     }
     public static void main(String[] args) { // unit testing (optional)
         RandomizedQueue<String> q = new RandomizedQueue<String>();
         while (!StdIn.isEmpty()) {
             String item = StdIn.readString();
-            q.enqueue(item);
+            if (item.equals("qqq"))
+                break;
+            else
+                q.enqueue(item);
         }
-        while (q.iterator().hasNext())
-            StdOut.println(q.iterator().next());
+        Iterator<String> i = q.iterator();
+        while (i.hasNext())
+            StdOut.println(i.next());
 
     }
 }
