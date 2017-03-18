@@ -33,20 +33,28 @@ public class Point implements Comparable<Point> {
         else if (this.y == that.y) {
             if (this.x < that.x)
                 return -1;
+            else if (this.x == that.x)
+                return 0;
         }
         return 1;
 
     }
     public double slopeTo(Point that) { // the slope between this point and that point
-        double result = -1 * (double) (that.y - this.y) / (double) (that.x - this.x) * this.compareTo(that);
-        if (Double.isNaN(result))
+        if (this.compareTo(that) == 0)
             return Double.NEGATIVE_INFINITY;
+        if (this.x == that.x)
+            return Double.POSITIVE_INFINITY;
+        if (this.y == that.y)
+            return 0.0;
+        double result = (double) (that.y - this.y) / (double) (that.x - this.x);
         return result;
     }
     public Comparator<Point> slopeOrder() {
         return new Comparator<Point>() {
             @Override
             public int compare(Point p1, Point p2) {
+                if (p1 == null || p2 == null)
+                    throw new NullPointerException();
                 double diff = slopeTo(p1) - slopeTo(p2);
                 if (diff > 0)
                     return 1;

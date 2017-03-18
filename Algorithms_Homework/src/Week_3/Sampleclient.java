@@ -21,6 +21,7 @@ public class Sampleclient {
         }
 
         // draw the points
+
         StdDraw.enableDoubleBuffering();
         StdDraw.setXscale(0, 32768);
         StdDraw.setYscale(0, 32768);
@@ -29,8 +30,10 @@ public class Sampleclient {
         }
         StdDraw.show();
 
+
         // print and draw the line segments
         BruteCollinearPoints collinear = new BruteCollinearPoints(points);
+        // FastCollinearPoints collinear = new FastCollinearPoints(points);
         for (LineSegment segment : collinear.segments()) {
             StdOut.println(segment);
             segment.draw();
