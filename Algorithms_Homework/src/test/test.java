@@ -7,6 +7,7 @@ import edu.princeton.cs.algs4.StdOut;
  */
 public class test {
     static public void main(String[] args) {
+
         StdOut.print( 0.0 / 0.0);
     }
 }
