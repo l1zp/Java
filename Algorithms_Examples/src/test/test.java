@@ -1,5 +1,6 @@
 package test;
 
+import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 
 /**
@@ -7,6 +8,7 @@ import edu.princeton.cs.algs4.StdOut;
  */
 public class test {
     public static void main(String[] args) {
-        StdOut.print("hello");
+       In in = new In(args[0]);
+
     }
 }
